@@ -1,0 +1,17 @@
+help
+ping
+botinfo
+dice
+say
+esay
+serverinfo
+addcmd
+deletecmd
+listcmds
+resetccmds
+nick
+purge
+kick
+ban
+unban
+socialmedia

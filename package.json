@@ -1,0 +1,19 @@
+{
+	"name": "Axol Bot",
+	"version": "1.0.0",
+	"description": "Bot made by Axol's Software with Moderation, utility, and custom commands",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"keywords": [],
+	"author": "Axol's Software",
+	"license": "MIT",
+	"dependencies": {
+		"revolt.js": "6.0.20",
+		"axios": "^1.5.1",
+		"nodemon": "^3.0.1",
+		"express": "^5.1.0",
+		"ejs": "^3.1.10"
+	}
+}
