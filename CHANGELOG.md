@@ -2,6 +2,13 @@
 
 Here is the changelog for all of the changes made to the Axol bot.
 
+### Version 1.0.1 - May 27th, 2025
+
+- Added a rolecolor command which allows you to change your role color with role gradient support
+- Added a translate command.
+- Updated the ping command to show the bot and API latency
+- Fixed typos in the README.md file
+
 ### Version 1.0.0 - May 17th, 2025
 
 The first release for the Axol Bot from Axol's Software. Here is the features of the initial release.

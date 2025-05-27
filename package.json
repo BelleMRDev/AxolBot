@@ -1,6 +1,6 @@
 {
 	"name": "Axol Bot",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Bot made by Axol's Software with Moderation, utility, and custom commands",
 	"main": "index.js",
 	"scripts": {
@@ -13,6 +13,7 @@
 		"revolt.js": "6.0.20",
 		"axios": "^1.5.1",
 		"nodemon": "^3.0.1",
+		"@iamtraction/google-translate": "^2.0.1",
 		"express": "^5.1.0",
 		"ejs": "^3.1.10"
 	}

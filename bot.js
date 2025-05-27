@@ -4,6 +4,7 @@ const { revoltbottoken, revoltbotprefix } = require('./config.json');
 const { MessageEmbed } = require('revolt.js');
 const AxolVer = require('./package.json');
 const os = require("os");
+const translate = require('@iamtraction/google-translate');
 
 let client = new Client();
 const token = revoltbottoken;
@@ -30,13 +31,16 @@ const dicenum = [
 client.on("message", async (message) => {
 	if (message.author?. bot) return;
 	if (message.content === prefix + "help") {
-		message.channel.sendMessage(`Commands for ${client.user.username}\n\n${prefix}help\n${prefix}ping\n${prefix}botinfo\n${prefix}dice\n${prefix}say\n${prefix}esay\n${prefix}serverinfo\n${prefix}purge\n${prefix}nick\n${prefix}kick\n${prefix}ban\n${prefix}unban\n${prefix}addcmd\n${prefix}deletecmd\n${prefix}listcmds\n${prefix}resetccmds`);
+		message.channel.sendMessage(`Commands for ${client.user.username}\n\n${prefix}help\n${prefix}ping\n${prefix}botinfo\n${prefix}dice\n${prefix}say\n${prefix}esay\n${prefix}translate\n${prefix}serverinfo\n${prefix}purge\n${prefix}nick\n${prefix}kick\n${prefix}ban\n${prefix}unban\n${prefix}rolecolor\n${prefix}addcmd\n${prefix}deletecmd\n${prefix}listcmds\n${prefix}resetccmds`);
 	}
 });
 
 client.on("message", async (message) => {
 	if (message.content === prefix + "ping") {
-		message.channel.sendMessage("Pong!");
+		let now = Date.now();
+		message.channel.sendMessage(`Checking ping....`).then((msg) => {
+			msg.edit({ content: `Bot Latency: ${Date.now() - now}ms\nAPI Latency: ${Math.round(client.websocket.ping)}ms`})
+		});
 	}
 });
 
@@ -50,7 +54,7 @@ client.on("message", async (message) => {
 			const seconds = Math.floor(uptime % 60);
 			return `${hours} hours, ${minutes} minutes, ${seconds} seconds`;
 		}
-		const embed = { title: `Information about ${client.user.username}`, description: `Bot Username: ${client.user.username}\nServers Im in: ${client.servers.size}\nBot Version: ${AxolVer.version}\nNode.JS version: ${process.version}\nRevolt.JS version: ${require("revolt.js").LIBRARY_VERSION}\nMy Uptime: ${uptime()}\nMachine: ${os.machine()}\nMemory Usage: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB\nInvite Me: https://app.revolt.chat/bot/${client.user._id}` }
+		const embed = { title: `Information about ${client.user.username}`, description: `Bot Username: ${client.user.username}\nServers Im in: ${client.servers.size}\nBot Version: ${AxolVer.version}\nNode.JS version: ${process.version}\nRevolt.JS version: ${require("revolt.js").LIBRARY_VERSION}\nMy Uptime: ${uptime()}\nMachine: ${os.machine()}\nMemory Usage: ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)} MB\nInvite Me: https://app.revolt.chat/bot/${client.user._id}\nSource code: https://gitlab.com/bellemr/axolbot` }
 		message.channel.sendMessage({ embeds: [embed] });
     }
 });
@@ -99,6 +103,30 @@ client.on("message", async (message) => {
 });
 
 client.on("message", async (message) => {
+    if (message.author?. bot) return;
+    if (typeof message.content != "string") return;
+    if (message.content.startsWith(prefix + "translate")) {
+        const words = message.content.split(" ");
+        words.shift();
+		let lang = message.content.split(' ')[1];
+        let text = message.content.split(' ')[2];
+		
+		if (!lang || !text) {
+			message.channel.sendMessage(`What is the language and text you want me to translate to: ${prefix}translate <lang> <text>`);
+		}
+
+		try {
+			const result = await translate(text, { to: lang });
+			const embed = { title: 'Translator', description: `Translated to: ${lang}\nOriginal Text: ${text}\n\nTranslated Text: ${result.text}` }
+			message.channel.sendMessage({ embeds: [embed] });
+		} catch (error) {
+			console.error(error);
+			message.channel.sendMessage('Something went wrong while trying to translate the text.');
+		}
+    }
+});
+
+client.on("message", async (message) => {
 	if (message.author?. bot) return;
     if (message.content === prefix + "serverinfo") {
 		const s = message.channel.server;    
@@ -128,13 +156,11 @@ client.on('message', async (message) => {
 				const embedresponse = response.slice(6).trim();
 				const embed = { description: `${embedresponse}` }
 				message.channel.sendMessage({ embeds: [embed] });
+			} else if (response.startsWith('reply:')){
+				const replyresponse = response.slice(6).trim();
+				message.reply(replyresponse);
 			} else {
-				if (response.startsWith('reply:')) {
-					const replyresponse = response.slice(6).trim();
-					message.reply(replyresponse);
-				} else {
-					message.channel.sendMessage(response);
-				}
+				message.channel.sendMessage(response);
 			}
 			return;
 		}
@@ -300,6 +326,25 @@ client.on("message", async (message) => {
 		if (await (await message.channel.server.fetchBans()).bans.find(b => b._id.user === target_id)) {
 			message.channel.server.unbanUser(target_id);
 			message.channel.sendMessage(`<@${target_id}> has been unbanned by <@${message.author_id}>.`);
+		}
+	}
+});
+
+client.on("message", async (message) => {
+	if (message.author?. bot) return;
+    if (typeof message.content != "string") return;
+    if (message.content.startsWith(prefix + "rolecolor")) {
+		if (message.member.hasPermission(message.channel.server, "ManageRole") === false) {
+			return message.channel.sendMessage("You are missing the following permission to use this command: ManageRole");
+		}
+		let role_id = message.content.split(' ')[1];
+		let colorarg = message.content.split(' ')[2];
+		try {
+			const changedRoleColor = await message.channel.server.editRole(role_id, {colour: `${colorarg}`});
+			message.channel.sendMessage(`"${changedRoleColor.name}"'s role color has been changed to ${changedRoleColor.colour}`);
+		} catch (error) {
+			console.log(`Error: ${error}`)
+			message.channel.sendMessage(`Error: ${error}`)
 		}
 	}
 });

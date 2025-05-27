@@ -1,14 +1,14 @@
 # Axol Bot
 
-Axol Bot is made by the Axol's Software community. It has:
+Axol Bot is a Revolt.chat bot made by the Axol's Software community. It has:
 
-- Moderation commands
-- Simple custom commands
+- Moderation commands like kick, ban, nick, and purge.
+- Simple custom commands system
 - Utility commands like say, esay, and serverinfo commands.
 
 ## Setup Guide
 
-Before setting up this bot, here are the minimum requirements to run this bot on your serverinfo
+Before setting up this bot, here are the minimum requirements to run this bot on your server
 
 - Node v20 or newer (Node v22 or newer recommended).
 - 512mb ram and 512mb disk space free (1gb ram free recommended)
@@ -30,7 +30,7 @@ Assuming your server or computer meets the minimum requirements, you can now sta
 ```
 
 4. Open the blockedwords.txt file and put in words or phrases (seperated with each line) you don't want the bot to say with the say or esay commands.
-5. Install the required packages. (You can use "npm install" to install everything from the package.json file).
+5. Install the required packages. (You can use "npm install" without the quotation marks to install everything from the package.json file).
 6. Launch the bot and enjoy (which can be done by running "node ." without the quotation marks).
 
 ## Links
