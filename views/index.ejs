@@ -25,7 +25,13 @@
 	<h3>Custom Commands</h3>
 	<p>To create and delete commands, you need the Kick Members permission within the server</p>
 	<p>To make a custom command, run <span style="border: 1px solid black">a!addcmd</span> followed by the command name and response. For example, <span style="border: 1px solid black">a!addcmd commandname Command response</span>. Your command response can have seperate lines. This can be accomplished by using \n for each line you want to make. For example, <span style="border: 1px solid black">a!addcmd commandname Command response\nwith a second line</span></p>
-	<p>To add an embed response, add embed: to the beginning of the response argument. For example, <span style="border: 1px solid black">a!addcmd commandname embed:Command Response</span></p>
+	<p>To add an embed response, add the embed: tag to the beginning of the response argument. For example, <span style="border: 1px solid black">a!addcmd commandname embed:Command Response</span></p>
+	<p>Here are the available tags for creating custom commands</p>
+	<ul>
+		<li><span style="border: 1px solid black">embed:</span> Make the response an embed</li>
+		<li><span style="border: 1px solid black">reply:</span> Make the response reply to the executing command</li>
+		<li><span style="border: 1px solid black">nsfw:</span> Make the command locked behind a NSFW marked channel</li>
+	</ul>
 	<p>You can view the list of custom commands for your server by running <span style="border: 1px solid black">a!listcmds</span>. You can use the custom command by using <span style="border: 1px solid black">a!commandname</span></p>
 	<p>To delete a custom command you made, run <span style="border: 1px solid black">a!deletecmd</span> followed by the command name. For example, <span style="border: 1px solid black">a!deletecmd commandname</span></p>
 	<p>There is a filter included in the bot to prevent users from creating commands that includes racial slurs, scams, and promoting illegal activities</p>
@@ -37,6 +43,7 @@
 		<li>Unban Command: <span style="border: 1px solid black">a!unban [userid]</span> - Revoke a ban on a user for the server. Requires the Ban Members permission</li>
 		<li>Nick Command: <span style="border: 1px solid black">a!nick [userid] [newname]</span> - Change the nickname of a user in the server. Requires the Kick Members permission</li>
 		<li>Purge Command: <span style="border: 1px solid black">a!purge [amount]</span> - Remove a certain amount of messages inside of the channel. Requires the Manage Messages permission</li>
+		<li>Role Color: <span style="border: 1px solid black">a!rolorcolor [roleid] [colorhex]</span> - Change the color of a role (with color gradient support). Requires the Manage Roles permission</li>
 	</ul>
 </body>
 </html>

@@ -159,6 +159,10 @@ client.on('message', async (message) => {
 			} else if (response.startsWith('reply:')){
 				const replyresponse = response.slice(6).trim();
 				message.reply(replyresponse);
+			} else if (response.startsWith('nsfw:')){
+				if (!message.channel.nsfw) return message.channel.sendMessage("This custom command requires the use of a NSFW marked channel");
+				const replyresponse = response.slice(6).trim();
+				message.channel.sendMessage(replyresponse);
 			} else {
 				message.channel.sendMessage(response);
 			}
