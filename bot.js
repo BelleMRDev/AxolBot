@@ -117,11 +117,11 @@ client.on("message", async (message) => {
 
 		try {
 			const result = await translate(text, { to: lang });
-			const embed = { title: 'Translator', description: `Translated to: ${lang}\nOriginal Text: ${text}\n\nTranslated Text: ${result.text}` }
+			const embed = { title: 'Translator', description: `Translated to: ${lang}\n\nOriginal Text: ${text}\n\nTranslated Text: ${result.text}` }
 			message.channel.sendMessage({ embeds: [embed] });
 		} catch (error) {
 			console.error(error);
-			message.channel.sendMessage('Something went wrong while trying to translate the text.');
+			message.channel.sendMessage('Something went wrong while trying to translate the text. If this continues to happen, contact the bot owner');
 		}
     }
 });
@@ -148,10 +148,28 @@ client.on('message', async (message) => {
 	const serverId = message.channel.server_id;
 	const content = message.content.trim();
 	
+	const placeholders = {
+		'{server_name}': message.channel.server.name,
+		'{server_id}': message.channel.server._id,
+		'{server_owner}': message.channel.server.owner,
+		'{author_id}': message.author_id
+	};
+	const replacePlaceholders = (text) => {
+		let newText = text;
+		for (const placeholder in placeholders) {
+			newText = newText.replace(new RegExp(escapeRegExp(placeholder), 'g'), placeholders[placeholder]);
+		}
+		return newText;
+	};
+	function escapeRegExp(string) {
+		return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the matched substring
+	}
+	
 	if (message.content.startsWith(prefix)) {
 		const [command, ...args] = content.slice(prefix.length).trim().split(/\s+/);
 		if (commands[serverId] && commands[serverId][command]) {
-			const response = commands[serverId][command];
+			let response = commands[serverId][command];
+			response = replacePlaceholders(response);
 			if (response.startsWith('embed:')) {
 				const embedresponse = response.slice(6).trim();
 				const embed = { description: `${embedresponse}` }
@@ -163,6 +181,12 @@ client.on('message', async (message) => {
 				if (!message.channel.nsfw) return message.channel.sendMessage("This custom command requires the use of a NSFW marked channel");
 				const replyresponse = response.slice(6).trim();
 				message.channel.sendMessage(replyresponse);
+			} else if (response.startsWith('admin:')){
+				if (message.member.hasPermission(message.channel.server, "ManageServer") === false) {
+					return message.channel.sendMessage("You are missing the following permission to use this command: ManageServer");
+				}
+				const replyresponse = response.slice(6).trim();
+				message.channel.sendMessage(replyresponse);
 			} else {
 				message.channel.sendMessage(response);
 			}
@@ -170,8 +194,8 @@ client.on('message', async (message) => {
 		}
 	}
 	if (message.content.startsWith(prefix + "addcmd")) {
-		if (message.member.hasPermission(message.channel.server, "KickMembers") === false) {
-			return message.channel.sendMessage("You are missing the following permission to use this command: KickMembers");
+		if (message.member.hasPermission(message.channel.server, "ManageServer") === false) {
+			return message.channel.sendMessage("You are missing the following permission to use this command: ManageServer");
 		}
 		const args = content.split(' ').slice(1);
 		const [commandName, ...response] = args;
@@ -191,17 +215,13 @@ client.on('message', async (message) => {
 			message.reply(`The command "${commandName}" already exists!`);
 			return;
 		}
-		if (commandResponse.startsWith('embed:')) {
-			commands[serverId][commandName] = commandResponse;
-		} else {
-			commands[serverId][commandName] = commandResponse;
-		}
+		commands[serverId][commandName] = commandResponse;
 		fs.writeFileSync('ccommands.json', JSON.stringify(commands, null, 2));
 		message.reply(`Command "${commandName}" added successfully!`);
 	}
 	if (message.content.startsWith(prefix + "deletecmd")) {
-		if (message.member.hasPermission(message.channel.server, "KickMembers") === false) {
-			return message.channel.sendMessage("You are missing the following permission to use this command: KickMembers");
+		if (message.member.hasPermission(message.channel.server, "ManageServer") === false) {
+			return message.channel.sendMessage("You are missing the following permission to use this command: ManageServer");
 		}
 		const args = content.split(' ').slice(1);
 		const commandName = args[0];
@@ -222,13 +242,13 @@ client.on('message', async (message) => {
 		}
 	}
 	if (message.content === prefix + "resetccmds") {
-		if (message.member.hasPermission(message.channel.server, "KickMembers") === false) {
-			return message.channel.sendMessage("You are missing the following permission to use this command: KickMembers");
+		if (message.member.hasPermission(message.channel.server, "ManageServer") === false) {
+			return message.channel.sendMessage("You are missing the following permission to use this command: ManageServer");
 		}
 		if (commands[serverId]) {
 			delete commands[serverId];
 			fs.writeFileSync('ccommands.json', JSON.stringify(commands, null, 2));
-			message.reply("All custom commands for this server have been removed.");
+			message.reply("All custom commands for this server has been removed.");
 		} else {
 			message.reply("There are no custom commands to remove for this server.");
 		}

@@ -1,6 +1,6 @@
 {
 	"name": "Axol Bot",
-	"version": "1.0.1",
+	"version": "1.0.3",
 	"description": "Bot made by Axol's Software with Moderation, utility, and custom commands",
 	"main": "index.js",
 	"scripts": {

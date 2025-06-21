@@ -2,6 +2,19 @@
 
 Here is the changelog for all of the changes made to the Axol bot.
 
+### Version 1.0.3 - June 21st, 2025
+
+- Custom commands feature now supports some values. Supported values: {server_id}, {server_name}, {server_owner}, {author_id}
+- Improved the translate and addcmd commands slightly.
+- Added a bew tag for the custom commands feature: admin: (Makes the command only usable to users with the Manage Server permission)
+
+### Version 1.0.2 - June 14th, 2025
+
+- Added the ability to make NSFW based commands for the custom commands feature with the new nsfw: tag
+- Made a Dockerfile which hopefully works
+- Added a setup.sh file for easy setup on Linux.
+- Updated the webserver part to mention the new stuff within v1.0.1 and v1.0.2. Updated the privacy policy to show another way to contact me.
+
 ### Version 1.0.1 - May 27th, 2025
 
 - Added a rolecolor command which allows you to change your role color with role gradient support
