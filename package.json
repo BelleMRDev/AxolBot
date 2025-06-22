@@ -1,6 +1,6 @@
 {
-	"name": "Axol Bot",
-	"version": "1.0.3",
+	"name": "axol-bot",
+	"version": "1.0.4",
 	"description": "Bot made by Axol's Software with Moderation, utility, and custom commands",
 	"main": "index.js",
 	"scripts": {
@@ -8,7 +8,7 @@
 	},
 	"keywords": [],
 	"author": "Axol's Software",
-	"license": "MIT",
+	"license": "Apache-2.0",
 	"dependencies": {
 		"revolt.js": "6.0.20",
 		"axios": "^1.5.1",
