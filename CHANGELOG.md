@@ -2,6 +2,13 @@
 
 Here is the changelog for all of the changes made to the Axol bot.
 
+### Version 1.0.4 - June 26th, 2025
+
+- Fixed the package.json file so it shows Apache-2.0 instead of MIT
+- Fixed an issue where the bot would crash if a user is not in the server when attempting to use the kick or ban command
+- Standard Commands filter is now built into the bot.js bot file so we have 1 less file to deal with.
+- Updated the index.ejs file to mention the new stuff from the v1.0.3 release for the webserver.
+
 ### Version 1.0.3 - June 21st, 2025
 
 - Custom commands feature now supports some values. Supported values: {server_id}, {server_name}, {server_owner}, {author_id}

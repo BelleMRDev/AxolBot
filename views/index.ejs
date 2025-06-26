@@ -5,8 +5,8 @@
 </head>
 <body>
 	<h1>Welcome to the Axol Bot website</h1>
-	<h3><a href="https://app.revolt.chat/bot/01JRE2PH7RJAZQ5YHW235QQ31H">Invite the bot</a> <a href="https://rvlt.gg/WJmNxmkv">Revolt.chat Server</a> | <a href="https://github.com/BelleMRDev/AxolBot">Github Source Code</a> | <a href="https://gitlab.com/bellemr/axolbot">Gitlab Source Code</a> | <a href="/privacy">Privacy Policy</a></h3>
-	
+	<h3><a href="https://app.revolt.chat/bot/01JRE2PH7RJAZQ5YHW235QQ31H">Invite the bot</a> - <a href="https://rvlt.gg/WJmNxmkv">Revolt.chat Server</a> - <a href="https://github.com/BelleMRDev/AxolBot">Github Source Code</a> - <a href="https://gitlab.com/bellemr/axolbot">Gitlab Source Code</a> - <a href="https://codeberg.org/BelleMRDev">Codeberg Source Code</a> - <a href="/privacy">Privacy Policy</a></h3>
+
 	<h1>Axol Bot Documentation</h1>
 	<p>Welcome to the Axol bot documentation section. This section will cover how to use the Axol bot for Revolt. If you are using a self hosted version of the bot, make sure to use the prefix of that bot. These docs explain using the original bot which the prefix is a!</p>
 	
@@ -31,6 +31,14 @@
 		<li><span style="border: 1px solid black">embed:</span> Make the response an embed</li>
 		<li><span style="border: 1px solid black">reply:</span> Make the response reply to the executing command</li>
 		<li><span style="border: 1px solid black">nsfw:</span> Make the command locked behind a NSFW marked channel</li>
+		<li><span style="border: 1px solid black">admin:</span> Make the command locked behind people with the Manage Server permission</li>
+	</ul>
+	<p>Here are the available values as introduced in v1.0.3</p>
+	<ul>
+		<li>{server_id} = The server ID</li>
+		<li>{server_name} = The name of the server</li>
+		<li>{server_owner} = The ID of the server owner</li>
+		<li>{author_id} = The command executer's user ID</li>
 	</ul>
 	<p>You can view the list of custom commands for your server by running <span style="border: 1px solid black">a!listcmds</span>. You can use the custom command by using <span style="border: 1px solid black">a!commandname</span></p>
 	<p>To delete a custom command you made, run <span style="border: 1px solid black">a!deletecmd</span> followed by the command name. For example, <span style="border: 1px solid black">a!deletecmd commandname</span></p>

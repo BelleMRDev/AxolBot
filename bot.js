@@ -138,9 +138,29 @@ client.on("message", async (message) => {
 
 
 
-let words = fs.readFileSync('standardcmds.txt', 'utf-8')
-    .split(/\r?\n/)
-    .map(word => word.trim().toLowerCase());
+
+	
+let words = [
+	'help',
+	'ping',
+	'botinfo',
+	'dice',
+	'say',
+	'esay',
+	'translate',
+	'serverinfo',
+	'addcmd',
+	'deletecmd',
+	'listcmds',
+	'resetccmds',
+	'nick',
+	'purge',
+	'kick',
+	'ban',
+	'unban',
+	'rolecolor',
+	'socialmedia'
+].map(word => word.trim().toLowerCase());
 
 client.on('message', async (message) => {
 	if (message.author?. bot) return;
@@ -306,12 +326,16 @@ client.on("message", async (message) => {
 		let target_id = message.content.split(' ')[1];
 		let reason = message.content.split(' ')[2];
 		let target = message.channel.server.fetchMember(target_id);
-		if ((await target).kickable !== true) {
-			message.channel.sendMessage("I can't kick this user. This may be because the user you are trying to kick has a role equal or higher then my highest role");
-		}
-		if ((await target).kickable === true) {
-			(await target).kick();
-			message.channel.sendMessage(`<@${target_id}> has been kicked by <@${message.author_id}> for **${reason}**`);
+		try {
+			if ((await target).kickable !== true) {
+				message.channel.sendMessage("I can't kick this user. This may be because the user you are trying to kick has a role equal or higher then my highest role");
+			}
+			if ((await target).kickable === true) {
+				(await target).kick();
+				message.channel.sendMessage(`<@${target_id}> has been kicked by <@${message.author_id}> for **${reason}**`);
+			}
+		} catch (error) {
+			message.channel.sendMessage(`${error}`)
 		}
 	}
 });
@@ -326,12 +350,16 @@ client.on("message", async (message) => {
 		let target_id = message.content.split(' ')[1];
 		let reason = message.content.split(' ')[2];
 		let target = message.channel.server.fetchMember(target_id);
-		if ((await target).bannable !== true) {
-			message.channel.sendMessage("I can't ban this user. This may be because the user you are trying to ban has a role equal or higher then my highest role");
-		}
-		if ((await target).bannable === true) {
-			await message.channel.server.banUser(target_id, { reason: reason })
-			message.channel.sendMessage(`<@${target_id}> has been banned by <@${message.author_id}> for **${reason}**`);
+		try {
+			if ((await target).bannable !== true) {
+				message.channel.sendMessage("I can't ban this user. This may be because the user you are trying to ban has a role equal or higher then my highest role");
+			}
+			if ((await target).bannable === true) {
+				await message.channel.server.banUser(target_id, { reason: reason })
+				message.channel.sendMessage(`<@${target_id}> has been banned by <@${message.author_id}> for **${reason}**`);
+			}
+		} catch (error) {
+			message.channel.sendMessage(`${error}`)
 		}
 	}
 });
