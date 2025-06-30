@@ -62,7 +62,7 @@ client.on("message", async (message) => {
 client.on('message', async (message) => {
 	if (message.content === prefix + "dice") {
 		const diceResult = dicenum[Math.floor(Math.random() * dicenum.length)];
-		message.channel.sendMessage(diceResult);
+		message.channel.sendMessage(`You rolled a ${diceResult}`);
 	}
 });
 
@@ -172,7 +172,8 @@ client.on('message', async (message) => {
 		'{server_name}': message.channel.server.name,
 		'{server_id}': message.channel.server._id,
 		'{server_owner}': message.channel.server.owner,
-		'{author_id}': message.author_id
+		'{author_id}': message.author_id,
+		'{author_name}': message.author_username
 	};
 	const replacePlaceholders = (text) => {
 		let newText = text;

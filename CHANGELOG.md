@@ -2,12 +2,18 @@
 
 Here is the changelog for all of the changes made to the Axol bot.
 
-### Version 1.0.4 - June 26th, 2025
+### Version 1.1.0a - June 30th, 2025
 
+This update introduces the Discord bot build. THIS IS A PRE RELEASE AS GITHUB SOURCE CODE IS BEING DISCONTINUED
+
+- The Discord bot is using discord.js v14.21.0
+- Discord bot has the following commands: help, botinfo, dice, say, esay, translate, serverinfo, addcmd, delcmd, listcmds, resetccmds
 - Fixed the package.json file so it shows Apache-2.0 instead of MIT
-- Fixed an issue where the bot would crash if a user is not in the server when attempting to use the kick or ban command
-- Standard Commands filter is now built into the bot.js bot file so we have 1 less file to deal with.
+- Fixed an issue where the Revolt bot would crash if a user is not in the server when attempting to use the kick or ban command
+- Standard Commands filter on the Revolt bot is now built into the bot.js bot file so we have 1 less file to deal with.
 - Updated the index.ejs file to mention the new stuff from the v1.0.3 release for the webserver.
+
+Github source code is discontinued. Use the Gitlab or Codeberg repos instead. Some of the changes were going to be on v1.0.4 but decided to move to this release.
 
 ### Version 1.0.3 - June 21st, 2025
 

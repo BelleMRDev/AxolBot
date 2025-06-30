@@ -6,6 +6,8 @@ Axol Bot is a Revolt.chat bot made by the Axol's Software community. It has:
 - Simple custom commands system
 - Utility commands like say, esay, and serverinfo commands.
 
+This source code now includes a Discord bot build you can use.
+
 ## Setup Guide
 
 Before setting up this bot, here are the minimum requirements to run this bot on your server
@@ -35,4 +37,4 @@ Assuming your server or computer meets the minimum requirements, you can now sta
 
 ## Links
 
-[Invite the bot](https://app.revolt.chat/bot/01JRE2PH7RJAZQ5YHW235QQ31H) - [Revolt Server](https://rvlt.gg/WJmNxmkv) - [Developers Youtube](https://www.youtube.com/channel/UCCYCRAt1srptO3dc7eeN4Yw)
+[Invite the Revolt bot](https://app.revolt.chat/bot/01JRE2PH7RJAZQ5YHW235QQ31H) - [Revolt Server](https://rvlt.gg/WJmNxmkv) - [Discord Server](https://discord.gg/hrUV9aq3p2) - [Developers Youtube](https://www.youtube.com/channel/UCCYCRAt1srptO3dc7eeN4Yw)

@@ -1,6 +1,6 @@
 {
 	"name": "axol-bot",
-	"version": "1.0.4",
+	"version": "1.1.0a",
 	"description": "Bot made by Axol's Software with Moderation, utility, and custom commands",
 	"main": "index.js",
 	"scripts": {
@@ -10,10 +10,14 @@
 	"author": "Axol's Software",
 	"license": "Apache-2.0",
 	"dependencies": {
+		"discord.js": "14.21.0",
+		"discord-api-types": "^0.37.56",
+		"@discordjs/rest": "^2.0.1",
 		"revolt.js": "6.0.20",
 		"axios": "^1.5.1",
 		"nodemon": "^3.0.1",
 		"@iamtraction/google-translate": "^2.0.1",
+		"node-fetch": "^3.3.2",
 		"express": "^5.1.0",
 		"ejs": "^3.1.10"
 	}
